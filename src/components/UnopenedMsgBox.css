@@ -1,0 +1,19 @@
+.circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    border-radius: 166px;
+    background: #CE1E1E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+
+.circle p {
+    font-size: 40px;
+    color: #FFF;
+    margin: 0;
+    line-height: 1;
+}
