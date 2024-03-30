@@ -39,6 +39,7 @@
 		"@prisma/client": "^5.11.0",
 		"@types/node": "^20.11.17",
 		"clerk-sveltekit": "^0.4.1",
+		"isomorphic-ws": "^5.0.0",
 		"ts-node": "^10.9.2",
 		"ws": "^8.16.0",
 		"zod": "^3.22.4"
