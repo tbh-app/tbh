@@ -5,17 +5,20 @@
 	"packageManager": "yarn@1.22.21",
 	"scripts": {
 		"dev": "vite dev",
+		"dev:pages": "wrangler pages dev .svelte-kit/cloudflare",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"db:generate": "prisma generate"
+		"db:generate": "prisma generate",
+		"db:generateprod": "prisma generate --no-engine"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/adapter-cloudflare": "^4.2.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"@types/ws": "^8.5.10",
 		"autoprefixer": "^10.4.17",
 		"daisyui": "^4.6.1",
 		"postcss": "^8.4.34",
@@ -30,13 +33,14 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@clerk/clerk-sdk-node": "^4.13.9",
 		"@clerk/themes": "^1.7.10",
+		"@neondatabase/serverless": "^0.9.0",
+		"@prisma/adapter-neon": "^5.11.0",
 		"@prisma/client": "^5.11.0",
 		"@types/node": "^20.11.17",
 		"clerk-sveltekit": "^0.4.1",
-		"dotenv": "^16.4.5",
 		"ts-node": "^10.9.2",
+		"ws": "^8.16.0",
 		"zod": "^3.22.4"
 	}
 }

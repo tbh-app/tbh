@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { User } from "@clerk/clerk-sdk-node";
   import Link from "../Link.svelte";
 
   // this feels wrong

@@ -1,16 +1,16 @@
-import { clerkClient } from '$lib/server/clerkClient.js';
+import { CLERK_SECRET_KEY } from '$env/static/private';
 import type { PageServerLoad } from './$types';
 import { z } from 'zod';
 import { redirect } from '@sveltejs/kit';
-import type { User } from '@clerk/clerk-sdk-node';
+import type { User } from '$lib/types/User';
 import prisma from '$lib/server/db';
 
 export const load: PageServerLoad = async ({ params }) => {
-	const getUser = (await clerkClient.users.getUserList({ username: [params.user] }))[0] as User | null;
+	const getUser = (await fetch(`https://api.clerk.com/v1/users?username=${params.user}`, { headers: { 'Authorization': `Bearer ${CLERK_SECRET_KEY}` } }).then(res => res.json()))[0] as User | null;
 	if (!getUser) throw redirect(302, '/404')
 
 	return {
-		imageUrl: getUser.imageUrl,
+		imageUrl: getUser.image_url,
 		username: getUser.username!,
 	};
 };

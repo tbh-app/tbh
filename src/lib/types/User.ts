@@ -1,0 +1,37 @@
+export interface User {
+    readonly id: string;
+    readonly object: string;
+    readonly username: string | null;
+    readonly first_name: string | null;
+    readonly last_name: string | null;
+    readonly image_url: string;
+    readonly has_image: boolean;
+    readonly primary_email_address_id: string | null;
+    readonly primary_phone_number_id: string | null;
+    readonly primary_web3_wallet_id: string | null;
+    readonly password_enabled: boolean;
+    readonly two_factor_enabled: boolean;
+    readonly totp_enabled: boolean;
+    readonly backup_code_enabled: boolean;
+    readonly email_addresses: any[];
+    readonly phone_numbers: any[];
+    readonly web3_wallets: any[];
+    readonly passkeys: any[];
+    readonly external_accounts: any[];
+    readonly saml_accounts: any[];
+    readonly public_metadata: any;
+    readonly private_metadata: any;
+    readonly unsafe_metadata: any;
+    readonly external_id: string | null;
+    readonly last_sign_in_at: number | null;
+    readonly banned: boolean;
+    readonly locked: boolean;
+    readonly lockout_expires_in_seconds: number | null;
+    readonly verification_attempts_remaining: number;
+    readonly created_at: number;
+    readonly updated_at: number;
+    readonly delete_self_enabled: boolean;
+    readonly create_organization_enabled: boolean;
+    readonly last_active_at: number;
+    readonly profile_image_url: string;
+}
