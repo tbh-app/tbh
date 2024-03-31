@@ -11,7 +11,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"db:generate": "prisma generate",
-		"db:generateprod": "prisma generate --no-engine"
+		"db:generateprod": "prisma generate --no-engine",
+		"tail": "wrangler pages deployment tail"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
