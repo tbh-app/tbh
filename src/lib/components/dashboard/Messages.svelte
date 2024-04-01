@@ -5,7 +5,7 @@
   export let clerk: any;
 </script>
 
-<div class="card w-full bg-base-200 shadow-xl card-full-height overflow-hidden">
+<div class="card w-full bg-base-200 shadow-xl card-full-height overflow-scroll">
     <div class="card-body">
       {#if messages.length === 0}
         <p class="text-center text-sky-500 text-2xl font-bold">

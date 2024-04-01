@@ -20,7 +20,7 @@
 <div class="modal" class:modal-open={openModal}>
   <div class="modal-box">
     <h3 class="font-bold text-lg">TBH message</h3>
-    <p class="py-4">{msg}</p>
+    <p class="py-4 break-words">{msg}</p>
     <div class="modal-action">
       <button class="btn" on:click={() => openModal = false}>Close</button>
     </div>
