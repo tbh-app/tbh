@@ -1,6 +1,9 @@
-<script>
+<script lang="ts">
   import NavBar from "$lib/components/NavBar.svelte";
   import "../app.css";
+  import type { LayoutData } from "./$types";
+  import { Toaster } from 'svelte-sonner'
+  export let data: LayoutData
 </script>
 
 <style lang="css">
@@ -10,5 +13,6 @@
     }
 </style>
 
-<NavBar />
+<NavBar user={data.user} />
+<Toaster theme="dark" />
 <slot />

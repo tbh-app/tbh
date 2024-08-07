@@ -1,8 +1,9 @@
 <script lang="ts">
+  import type { User } from "lucia";
   import Link from "../Link.svelte";
   import Message from "./messages/Message.svelte";
   export let messages: Array<string>
-  export let clerk: any;
+  export let user: User;
 </script>
 
 <div class="card w-full bg-base-200 shadow-xl card-full-height overflow-scroll">
@@ -13,7 +14,7 @@
           Why not post your link?
         </p>
         <div class="sm:hidden">
-          <Link username={clerk.user?.username} />
+          <Link username={user.username} />
         </div>
       {/if}
       {#each [...messages] as msg}

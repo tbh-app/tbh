@@ -2,16 +2,13 @@
 	"name": "tbh",
 	"version": "0.0.1-alpha",
 	"private": true,
-	"packageManager": "yarn@1.22.21",
 	"scripts": {
 		"dev": "vite dev",
 		"dev:pages": "wrangler pages dev .svelte-kit/cloudflare",
-		"build": "yarn db:generateprod && vite build",
+		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-		"db:generate": "prisma generate",
-		"db:generateprod": "prisma generate --no-engine",
 		"tail": "wrangler pages deployment tail --project-name=tbh"
 	},
 	"devDependencies": {
@@ -22,6 +19,8 @@
 		"@types/ws": "^8.5.10",
 		"autoprefixer": "^10.4.17",
 		"daisyui": "^4.6.1",
+		"dotenv": "^16.4.5",
+		"drizzle-kit": "^0.23.2",
 		"postcss": "^8.4.34",
 		"prisma": "^5.11.0",
 		"svelte": "^4.2.7",
@@ -34,16 +33,21 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@clerk/themes": "^1.7.10",
+		"@libsql/client": "^0.6.1",
+		"@lucia-auth/adapter-drizzle": "^1.0.7",
 		"@neondatabase/serverless": "^0.9.0",
 		"@prisma/adapter-neon": "^5.11.0",
 		"@prisma/client": "^5.11.0",
 		"@prisma/extension-accelerate": "^1.0.0",
 		"@types/node": "^20.11.17",
-		"clerk-sveltekit": "^0.4.1",
-		"isomorphic-ws": "^5.0.0",
+		"drizzle-orm": "^0.32.2",
+		"lucia": "^3.2.0",
+		"lucide-svelte": "^0.381.0",
+		"postgres": "^3.4.4",
+		"svelte-sonner": "^0.3.27",
 		"ts-node": "^10.9.2",
 		"ws": "^8.16.0",
-		"zod": "^3.22.4"
-	}
+		"zod": "^3.23.8"
+	},
+	"packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
