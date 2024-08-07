@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enhance } from '$app/forms'
   import type { User } from 'lucia';
   export let user: User | null;
 
@@ -35,16 +36,14 @@
 
 <div class="modal" class:modal-open={openModal}>
   <div class="modal-box">
-    <form>
+    <form action="/dashboard?/gravatar" method="post" use:enhance on:submit={() => openModal = false}>
       <h3 class="font-bold text-lg">Set Gravatar email</h3>
-      <div class="form-control">
-        <label class="label">
-          <span class="label-text">Email</span>
-        </label>
-        <input type="email" class="input input-bordered" placeholder="Email" />
+      <div class="form-control pt-5">
+        <input type="email" class="input input-bordered" placeholder="Email" name="email" />
       </div>
       <div class="modal-action">
         <button class="btn" on:click={() => openModal = false}>Close</button>
+        <button class="btn btn-primary" type="submit">Save</button>
       </div>
     </form>
   </div>
