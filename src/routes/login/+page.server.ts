@@ -22,7 +22,7 @@ export const actions = {
             return {
                 success: false,
                 message: 'Incorrect username or password'
-            }
+            };
         }
 
         const hashedPassword = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(parsed.data.password)).then(buffer => Array.from(new Uint8Array(buffer)).map(byte => byte.toString(16).padStart(2, '0')).join(''))

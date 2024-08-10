@@ -1,14 +1,9 @@
-import { createClient } from '@libsql/client/web';
-import { drizzle } from 'drizzle-orm/postgres-js';
+import { drizzle } from 'drizzle-orm/neon-serverless';
 import * as schema from './schema';
+import { Pool } from '@neondatabase/serverless'
 import { DATABASE_URL } from '$env/static/private';
-import postgres from 'postgres';
 
-/* const turso = createClient({
-    url: DATABASE_URL,
-    authToken: DATABASE_AUTH_TOKEN,
-}); */
-const pg = postgres(DATABASE_URL)
-const db = drizzle(pg, { schema });
+const pool = new Pool({ connectionString: DATABASE_URL });
+const db = drizzle(pool, { schema });
 
 export default db;
