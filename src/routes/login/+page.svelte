@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { ActionData } from './$types';
-    import { User, Asterisk } from 'lucide-svelte'
+    import User from 'lucide-svelte/icons/user';
+    import Asterisk from 'lucide-svelte/icons/asterisk';
     import { toast } from 'svelte-sonner'
     import { enhance } from '$app/forms'
     export let form: ActionData;

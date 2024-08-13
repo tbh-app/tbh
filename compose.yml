@@ -9,4 +9,4 @@ services:
     volumes:
       - psql-tbh:/var/lib/postgresql/data
     ports:
-      - 5555:5432
+      - 5554:5432
