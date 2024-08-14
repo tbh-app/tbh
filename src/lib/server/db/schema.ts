@@ -1,29 +1,26 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, integer, date, timestamp } from "drizzle-orm/pg-core";
+import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 
-export const user = pgTable("user", {
-	id: text("id").primaryKey().default(crypto.randomUUID()),
+export const user = sqliteTable("user", {
+	id: text("id").primaryKey().notNull(),
     username: text("username").notNull().unique(),
     hashedPassword: text("hashed_password").notNull(),
     imageUrl: text("image_url").default('/tbh.webp'),
 });
 
-export const session = pgTable("session", {
-    id: text("id").primaryKey(),
+export const session = sqliteTable("session", {
+	id: text("id").notNull().primaryKey(),
 	userId: text("user_id")
 		.notNull()
 		.references(() => user.id),
-	expiresAt: timestamp("expires_at", {
-		withTimezone: true,
-		mode: "date"
-	}).notNull()
+	expiresAt: integer("expires_at").notNull()
 });
 
-export const question = pgTable("question", {
+export const question = sqliteTable("question", {
     id: text("id").primaryKey(),
     forUsername: text("for_username")
         .notNull()
         .references(() => user.username),
     body: text("text").notNull(),
-    createdAt: date('created-at')
+    createdAt: text("created_at").default(sql`(CURRENT_TIMESTAMP)`),
 });
