@@ -10,7 +10,7 @@ RUN yarn install --production --ignore-scripts --prefer-offline
 FROM node:lts-alpine
 WORKDIR /app
 COPY --from=builder /app/build build/
-COPY --from=builder /app/public public/
+COPY --from=builder /app/static static/
 COPY --from=builder /app/db db/
 COPY --from=builder /app/node_modules node_modules/
 COPY package.json .
