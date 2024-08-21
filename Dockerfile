@@ -5,7 +5,7 @@ COPY yarn.lock .
 RUN yarn install
 COPY . .
 RUN yarn build
-RUN yarn install --production --ignore-scripts --prefer-offline
+RUN yarn install
 
 FROM node:lts-alpine
 WORKDIR /app
