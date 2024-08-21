@@ -1,5 +1,8 @@
-import { DATABASE_URL } from "$env/static/private"
-import { PrismaClient } from "@prisma/client/edge"
+import { drizzle } from 'drizzle-orm/better-sqlite3';
+import * as schema from './schema';
+import Database from 'better-sqlite3';
 
-const prisma = new PrismaClient({ datasources: { db: { url: DATABASE_URL } } })
-export default prisma
+const sqlite = new Database('db/database.db')
+const db = drizzle(sqlite, { schema });
+
+export default db;

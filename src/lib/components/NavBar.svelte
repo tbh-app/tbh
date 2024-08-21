@@ -1,22 +1,50 @@
-<script>
-  import SignedIn from "clerk-sveltekit/client/SignedIn.svelte";
-  import SignedOut from "clerk-sveltekit/client/SignedOut.svelte";
-  import UserButton from "clerk-sveltekit/client/UserButton.svelte";
-  import { dark } from '@clerk/themes';
+<script lang="ts">
+  import { enhance } from '$app/forms'
+  import type { User } from 'lucia';
+  export let user: User | null;
+
+  let openModal = false
 </script>
 <div class="navbar bg-base-300 mb-3">
     <div class="flex-1">
-      <a class="btn btn-ghost text-xl">
+      <button class="btn btn-ghost text-xl">
         <a href="/">TBH</a>
-      </a>
+      </button>
     </div>
     <div class="flex-none gap-2">
-        <SignedIn>
+        {#if user}
           <a class="btn btn-outline" href="/dashboard">Dashboard</a>
-        </SignedIn>
-        <UserButton appearance={{ baseTheme: dark }} />
-        <SignedOut>
-          <a class="btn btn-ghost" href="/signIn">Sign in</a>
-        </SignedOut>
-    </div>
+          <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="avatar placeholder select-none cursor-pointer bg-neutral text-neutral-content rounded-full w-12">
+              {#if user.imageUrl}
+                <img src={user.imageUrl} alt="avatar" class="rounded-full w-12" />
+              {:else}
+                <span>{user.username}</span>
+              {/if}
+            </div>
+            <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+            <ul tabindex="0" class="dropdown-content mt-2 z-[1] menu p-2 shadow bg-base-200 rounded-box w-52">
+              <li><button on:click={() => openModal = true}>Set gravatar email</button></li>
+              <li><a href="/api/logout">Log out</a></li>
+            </ul>
+          </div>
+          {:else}
+            <a class="btn btn-ghost" href="/login">Sign in</a>
+        {/if}
+      </div>
+</div>
+
+<div class="modal" class:modal-open={openModal}>
+  <div class="modal-box">
+    <form action="/dashboard?/gravatar" method="post" use:enhance on:submit={() => openModal = false}>
+      <h3 class="font-bold text-lg">Set Gravatar email</h3>
+      <div class="form-control pt-5">
+        <input type="email" class="input input-bordered" placeholder="Email" name="email" />
+      </div>
+      <div class="modal-action">
+        <button class="btn" on:click={() => openModal = false}>Close</button>
+        <button class="btn btn-primary" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
 </div>

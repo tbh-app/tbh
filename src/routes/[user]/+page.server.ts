@@ -1,17 +1,17 @@
-import { CLERK_SECRET_KEY } from '$env/static/private';
 import type { PageServerLoad } from './$types';
 import { z } from 'zod';
 import { redirect } from '@sveltejs/kit';
-import type { User } from '$lib/types/User';
-import prisma from '$lib/server/db';
+import db from '$lib/server/db';
+import * as schema from '$lib/server/db/schema';
+import { eq } from 'drizzle-orm';
 
 export const load: PageServerLoad = async ({ params }) => {
-	const getUser = (await fetch(`https://api.clerk.com/v1/users?username=${params.user}`, { headers: { 'Authorization': `Bearer ${CLERK_SECRET_KEY}` } }).then(res => res.json()))[0] as User | null;
+	const getUser = await db.select().from(schema.user).where(eq(schema.user.username, params.user)).execute().then(res => res[0]);
 	if (!getUser) throw redirect(302, '/404')
 
 	return {
-		imageUrl: getUser.image_url,
-		username: getUser.username!,
+		imageUrl: getUser.imageUrl,
+		username: getUser.username,
 	};
 };
 
@@ -28,11 +28,10 @@ export const actions = {
 		try {
 			formSchema.parse({ question, username })
 
-			await prisma.question.create({
-				data: {
-					body: question as string,
-					forUser: username as string
-				}
+			await db.insert(schema.question).values({
+				body: question as string,
+				forUsername: username as string,
+				id: crypto.randomUUID()
 			})
 			return {
 				success: true,
